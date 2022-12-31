@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moving One Object</title>
+    <style>
+        *{padding: 0; margin: 0; box-sizing: border-box;}
+
+      body{width: 100vw; height: 100vh; padding: 10px;  overflow: hidden;}
+        
+      main{
+        width: 100%;  height: 100%;
+        background-image: linear-gradient(to right, skyblue, lightblue);
+        border: 5px solid #2245;
+      }
+      .demo{
+        width: 50px; height: 50px;
+        background-color: tomato;
+        border-radius: 50%;
+        outline: 3px solid #2245;
+        outline-offset: 3px;
+        position: absolute;
+        left: 640px; 
+        top: 290px;
+      }
+    
+    </style>
+</head>
+<body>
+        <main>
+            <div class="demo" id="demo"></div>
+        </main>
+      
+<script>
+
+let px
+let py 
+let dx 
+let dy 
+let vel 
+let obj 
+let tmp 
+
+function starting(){
+    alert(" Move the Object using the keybourd's arrow! ")
+     px=640
+     py=290
+     dx=0
+     dy=0
+     vel=2
+     obj=document.getElementById('demo')
+     tmp=setInterval(enterFrame, 1)
+    document.addEventListener('keydown', eventKeyDown)
+    document.addEventListener('keyup', eventKeyUp)
+}
+function eventKeyDown(){
+    let tecla=event.keyCode
+    if(tecla===37)      { dx=-1}
+    else if(tecla===38) { dy=-1}
+    else if(tecla===39) { dx= 1}
+    else if(tecla===40) { dy= 1}
+
+    if(px<20)px=1266
+    if(px>1266)px=20
+
+    if(py<20)py=550
+    if(py>550)py=20
+}
+
+function eventKeyUp(){
+    let tecla=event.keyCode
+    if(tecla===37)      { dx=0}
+    else if(tecla===38) { dy=0}
+    else if(tecla===39) { dx=0}
+    else if(tecla===40) { dy=0}
+}
+
+function enterFrame(){
+    px+=dx*vel
+    py+=dy*vel
+    obj.style.left=px+'px'
+    obj.style.top=py+'px'
+}
+
+window.addEventListener('load', starting)
+
+</script>        
+
+</body>
+</html>
